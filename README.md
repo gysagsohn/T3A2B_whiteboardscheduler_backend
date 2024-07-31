@@ -21,6 +21,7 @@ Mongoose DB
 
 ## Models
 - User
+- company - need to see for data sterlization if I should make one or as this is a solution for my compnay at this stage do I need one
 - Asset
 - Operator
 - Client
