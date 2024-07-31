@@ -1,21 +1,25 @@
-const mongoose = require("mongoose")
-
+// Import the mongoose module
 const mongoose = require("mongoose");
 
-const clientSchema = moongoose.Scheme({
-    clientname:{
-        type:[string],
+// Define the client schema
+const clientSchema = mongoose.Schema({
+    // Define the client name field with string array type, required, and unique constraints
+    clientname: {
+        type: [String],
         required: true,
         unique: true
-    }
-    Projects:{
+    },
+    // Define the projects field with string type and required constraint
+    Projects: {
         type: String,
-        required:true,
+        required: true,
     }
-})
+});
 
+// Create the Client model based on the client schema
 const ClientModel = mongoose.model("Client", clientSchema);
 
+// Export the Client model
 module.exports = {
     ClientModel
 }

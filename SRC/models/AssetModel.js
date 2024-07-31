@@ -1,28 +1,42 @@
+// Import the mongoose module
 const mongoose = require("mongoose");
 
-const assetSchema = moongoose.Scheme({
-    assetnumber:{
-        type: Integer,
+// Define the asset schema
+const assetSchema = mongoose.Schema({
+    // Define the asset number field with integer type, required, and unique constraints
+    assetnumber: {
+        type: Number,
         required: true,
         unique: true
-    assettype:{
-        // THis might change as reather then being a pre-fixed class option, I might want to give the user the option to make the type
-        type:[string],
-        enum:["Vac Truck 6000L", "Vac Truck 8000L", "Vac Truck Comboo", "Tipper 2t", "Tipper 4T"],
+    },
+    // Define the asset type field with string array type, enum options, and required constraint
+    assetType: {
+        // Note: This might change to allow user-defined types instead of fixed enum options
+        type: [String],
+        enum: ["Vac Truck 6000L", "Vac Truck 8000L", "Vac Truck Comboo", "Tipper 2t", "Tipper 4T"],
         required: true
-    }
-    Rego:{
+    },
+    // Define the registration field with string type, required, and unique constraints
+    rego: {
         type: String,
-        required:true,
+        required: true,
         unique: true
-    }
-    licenceclass:{
-        assettype:{
-            // THis might change as reather then being a pre-fixed class option, I might want to give the user the option to make the type
-            type:[string],
-            enum:["c", "HR", "HC"],
+    },
+    // Define the license class field with string array type, enum options, and required constraint
+    licenceClass: {
+        assettype: {
+            // Note: This might be moved to its own model as it's the same in both asset and operator models
+            type: [String],
+            enum: ["C", "HR", "HC"],
             required: true
         }
     }
+});
 
-})
+// Create the Asset model based on the asset schema
+const AssetModel = mongoose.model("Asset", assetSchema);
+
+// Export the Asset model
+module.exports = {
+    AssetModel
+}
