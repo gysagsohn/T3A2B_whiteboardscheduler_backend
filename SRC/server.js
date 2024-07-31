@@ -12,6 +12,9 @@ app.get("/", (request, response, next) => {
 	});
 });
 
+const userRouter = require("./controllers/userRouter.js")
+app.use("/users", userRouter);
+
 module.exports = {
 	app // Exporting the app instance for use in other files
 }

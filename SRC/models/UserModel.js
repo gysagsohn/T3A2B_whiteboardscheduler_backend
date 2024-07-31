@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcryptjs");
 
 // Define the schema for the user model
 const userSchema = mongoose.Schema({
@@ -7,7 +7,6 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: true // Ensure usernames are unique
-        trim: true // Remove whitespace from both ends of the string some error handling
     },
     password: {
         type: String,
