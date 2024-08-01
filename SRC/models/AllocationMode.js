@@ -1,38 +1,48 @@
+// Import the mongoose module
 const mongoose = require("mongoose");
 
+// Define the allocation schema
 const allocationSchema = mongoose.Schema({
-    asset:{
+    // Reference to the Asset model
+    asset: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "asset",
+        ref: "Asset",
         required: true
     },
-    operator:{
+    // Reference to the Operator model
+    operator: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:"Operator",
+        ref: "Operator",
         required: true
     },
-    client:{
+    // Reference to the Client model
+    client: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:"Client",
+        ref: "Client",
         required: true
     },
-    date:{
+    // Date field for the job allocation
+    date: {
         type: Date,
         required: true
     },
-    shiftType:{
+    // Field for the shift type with enum options for day and night
+    shiftType: {
         type: String,
         enum: ["Day", "Night"],
         required: true
     },
+    // Optional description field for additional job details
     description: {
         type: String,
         required: false
     }
 });
 
+// Create the Allocation model based on the allocation schema
 const AllocationModel = mongoose.model("Allocation", allocationSchema);
 
+// Export the Allocation model
 module.exports = {
     AllocationModel
-}
+};
