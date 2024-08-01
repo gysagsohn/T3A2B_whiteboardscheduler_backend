@@ -22,7 +22,7 @@ const allocationSchema = mongoose.Schema({
         required: true
     },
     // Date field for the job allocation
-    date: {
+    date: {   
         type: Date,
         required: true
     },

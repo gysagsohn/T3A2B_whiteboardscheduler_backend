@@ -13,9 +13,9 @@ const operatorSchema = mongoose.Schema({
     licenceClass: {
         // As this is the same in Asset Model, it might be made into its own model
         type: [String],
-        enum: ["c", "HR", "HC"],
+        enum: ["C", "HR", "HC"],
         required: true
-    }
+    },
     // Define the available days field with array of strings type and enum constraints
     availableDays: {
         type: [String],
