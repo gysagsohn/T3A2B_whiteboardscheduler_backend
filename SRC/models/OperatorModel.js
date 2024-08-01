@@ -16,6 +16,12 @@ const operatorSchema = mongoose.Schema({
         enum: ["c", "HR", "HC"],
         required: true
     }
+    // Define the available days field with array of strings type and enum constraints
+    availableDays: {
+        type: [String],
+        enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        required: true
+    }
 });
 
 // Create the Operator model based on the operator schema
