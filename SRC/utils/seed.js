@@ -22,9 +22,14 @@ async function seedUsers() {
         }
     ];
 
-    let result = await UserModel.insertMany(userData);
-    console.log(result);
-    return result;
+    let results = [];
+    for (let data of userData) {
+        let user = new UserModel(data);
+        let result = await user.save();
+        results.push(result);
+        console.log(result);
+    }
+    return results;
 }
 
 // Seed Assets
@@ -44,9 +49,14 @@ async function seedAssets() {
         }
     ];
 
-    let result = await AssetModel.insertMany(assetData);
-    console.log(result);
-    return result;
+    let results = [];
+    for (let data of assetData) {
+        let asset = new AssetModel(data);
+        let result = await asset.save();
+        results.push(result);
+        console.log(result);
+    }
+    return results;
 }
 
 // Seed Clients
@@ -62,9 +72,14 @@ async function seedClients() {
         }
     ];
 
-    let result = await ClientModel.insertMany(clientData);
-    console.log(result);
-    return result;
+    let results = [];
+    for (let data of clientData) {
+        let client = new ClientModel(data);
+        let result = await client.save();
+        results.push(result);
+        console.log(result);
+    }
+    return results;
 }
 
 // Seed Operators
@@ -82,9 +97,14 @@ async function seedOperators() {
         }
     ];
 
-    let result = await OperatorModel.insertMany(operatorData);
-    console.log(result);
-    return result;
+    let results = [];
+    for (let data of operatorData) {
+        let operator = new OperatorModel(data);
+        let result = await operator.save();
+        results.push(result);
+        console.log(result);
+    }
+    return results;
 }
 
 // Seed Allocations
@@ -108,9 +128,14 @@ async function seedAllocations(assets, clients, operators) {
         }
     ];
 
-    let result = await AllocationModel.insertMany(allocationData);
-    console.log(result);
-    return result;
+    let results = [];
+    for (let data of allocationData) {
+        let allocation = new AllocationModel(data);
+        let result = await allocation.save();
+        results.push(result);
+        console.log(result);
+    }
+    return results;
 }
 
 // Seed function
