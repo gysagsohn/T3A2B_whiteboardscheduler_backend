@@ -1,3 +1,4 @@
+// src/utils/seed.js
 const { UserModel } = require("../models/UserModel");
 const { AssetModel } = require("../models/AssetModel");
 const { ClientModel } = require("../models/ClientModel");
