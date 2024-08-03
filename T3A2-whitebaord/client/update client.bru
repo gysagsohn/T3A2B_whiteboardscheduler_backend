@@ -1,0 +1,17 @@
+meta {
+  name: update client
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3000/clients/66adaaea987d7917f089c238
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "clientname": "gy test to see if changes"
+  }
+}

@@ -23,6 +23,9 @@ app.use("/users", userRouter);
 const assetRouter = require("./controllers/assetRouter.js")
 app.use("/assets", assetRouter);
 
+const clientRouter = require("./controllers/clientRouter.js")
+app.use("/clients", clientRouter);
+
 // Handle 404 Not Found
 app.use(notFoundHandler);
 

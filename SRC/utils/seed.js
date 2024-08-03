@@ -24,16 +24,24 @@ async function seedUsers() {
         }
     ];
 
+    // Initialise an empty array to store results
     let results = [];
+    // Loop through each user data entry in the userData array
     for (let data of userData) {
+        // Create a new UserModel instance with the current user data
         let user = new UserModel(data);
+        // Save the user instance to the database and store the result
         let result = await user.save();
+        // Generate a JWT for the newly created user using their ID
         let token = createJwt(result._id);
-        console.log("Generated JWT:", token);
+        console.log("Generated JWT:", token); // Print the generated JWT
+        // Validate the generated JWT to ensure it's correct
         let isValid = validateJwt(token);
-        console.log("Is JWT valid?", isValid);
+        console.log("Is JWT valid?", isValid); // Print whether the JWT is valid or not
+        // Add the saved user result to the results array
         results.push(result);
     }
+    // Return the array of results
     return results;
 }
 

@@ -1,0 +1,18 @@
+meta {
+  name: new client
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/clients
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "clientname": "gy test",
+    "Projects": "hope this works"
+  }
+}
