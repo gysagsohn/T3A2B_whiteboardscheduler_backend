@@ -5,6 +5,7 @@ const { OperatorModel } = require("../models/OperatorModel");
 const { AllocationModel } = require("../models/AllocationModel");
 const { databaseConnect, databaseClose, databaseDrop } = require("./database");
 const bcrypt = require("bcryptjs");
+const { createJwt, validateJwt } = require("./auth");
 
 // Seed Users
 async function seedUsers() {
@@ -25,12 +26,13 @@ async function seedUsers() {
 
     let results = [];
     for (let data of userData) {
-        // Hash the password before saving
-        data.password = await bcrypt.hash(data.password, 10);
         let user = new UserModel(data);
         let result = await user.save();
+        let token = createJwt(result._id);
+        console.log("Generated JWT:", token);
+        let isValid = validateJwt(token);
+        console.log("Is JWT valid?", isValid);
         results.push(result);
-        console.log(result);
     }
     return results;
 }
