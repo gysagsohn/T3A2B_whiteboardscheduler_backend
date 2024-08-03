@@ -236,3 +236,27 @@ Wrong route
 ![alt text](<T3A2/PartB/Development Testing/route/erro handling/general error handling.png>)
 
 
+### Backend server testing
+Please see below to see testing for route once it was deployed to Render and MongoDB
+
+Backend deployed on render
+![alt text](<T3A2/PartB/Development Testing/backend server testing/backend server live render.png>) 
+![alt text](<T3A2/PartB/Development Testing/backend server testing/backend serverlive.png>) 
+
+Route to allocations
+![alt text](<T3A2/PartB/Development Testing/backend server testing/backend allocations.png>) 
+
+Route to asset
+![alt text](<T3A2/PartB/Development Testing/backend server testing/backend assets.png>) 
+
+Route to operators
+![alt text](<T3A2/PartB/Development Testing/backend server testing/backend operators.png>) 
+
+Route to users
+![alt text](<T3A2/PartB/Development Testing/backend server testing/backend users.png>)
+
+Route to clients
+![alt text](<T3A2/PartB/Development Testing/backend server testing/backend route to clients.png>)
+
+Error route
+![alt text](<T3A2/PartB/Development Testing/backend server testing/backend error test wrong route.png>) 
