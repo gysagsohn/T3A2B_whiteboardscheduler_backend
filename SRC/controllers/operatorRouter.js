@@ -30,13 +30,13 @@ router.get("/:id", asyncHandler(async (req, res, next) => {
 
 // Create a new operator
 router.post("/", asyncHandler(async (req, res, next) => {
-    const { operatorname, licenceClass, availabledate } = req.body;
+    const { operatorName, licenceClass, availableDays } = req.body;
 
-    if (!operatorname || !licenceClass || !availabledate) {
+    if (!operatorName || !licenceClass || !availableDays) {
         return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const existingOperator = await OperatorModel.findOne({ operatorname }).exec();
+    const existingOperator = await OperatorModel.findOne({ operatorName }).exec();
     if (existingOperator) {
         return res.status(400).json({ message: "Operator with this name already exists" });
     }
