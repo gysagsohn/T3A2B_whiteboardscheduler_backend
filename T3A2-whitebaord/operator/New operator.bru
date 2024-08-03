@@ -1,0 +1,20 @@
+meta {
+  name: New operator
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/operators/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "operatorName": "Gy test",
+    "licenceClass": "C",
+    "availableDays": ["Monday", "Tuesday"]
+  }
+  
+}

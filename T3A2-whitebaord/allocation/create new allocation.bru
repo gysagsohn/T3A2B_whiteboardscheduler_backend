@@ -1,0 +1,23 @@
+meta {
+  name: create new allocation
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/allocations/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "asset": "66ad8c68e6ac15582f13507b",
+    "operator": "66ad8c68e6ac15582f135083",
+    "client": "66ad8c68e6ac15582f13507f",
+    "allocationDate": "2023-08-01T00:00:00.000Z",
+    "shiftType": "Day",  
+    "date": "2023-08-01"
+  }
+  
+}

@@ -1,0 +1,17 @@
+meta {
+  name: update operator
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3000/operators/66adb04db4ee3f7388e9d22f
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "operatorName": "Gy test 3"
+  }
+}
