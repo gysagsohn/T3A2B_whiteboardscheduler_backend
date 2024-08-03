@@ -1,0 +1,17 @@
+meta {
+  name: delete asset by id
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:3000/assets/66ad8c68e6ac15582f135079
+  body: json
+  auth: none
+}
+
+body:json {
+   {
+    "rego": "test"
+   }
+}

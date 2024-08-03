@@ -58,6 +58,7 @@ This is the production branch where I will be working on the code. It will only 
 - bcryptjs
 - jsonwebtoken
 - dotenv
+- cors
 
 
 Future improvements
