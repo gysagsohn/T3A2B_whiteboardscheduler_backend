@@ -1,55 +1,84 @@
+// assetRouter.js
 const express = require("express");
-const { UserModel } = require("../models/UserModel")
-const { createJwt, validateJwt } = require("../utils/auth");
-const router = express.Router()
+const { AssetModel } = require("../models/AssetModel");
+const router = express.Router();
 
-//ground work for controller and can add models to this
-router.get("/", async (request, response, next) =>{
+const asyncHandler = fn => (req, res, next) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+};
 
-    let result = await UserModel.find({}).exec();
-    response.json({
-        message:"Fetched all users",
+// Get all assets
+router.get("/", asyncHandler(async (req, res, next) => {
+    let result = await AssetModel.find({}).exec();
+    res.json({
+        message: "Fetched all assets",
         result: result
     });
-}); 
+}));
 
-// Get a user by ID
-router.get("/:id", async (request, response, next) => {
-    let result = await UserModel.findById(request.params.id).exec();
-    response.json({
-        message: "Fetched user by ID",
+// Get an asset by ID
+router.get("/:id", asyncHandler(async (req, res, next) => {
+    let result = await AssetModel.findById(req.params.id).exec();
+    if (!result) {
+        return res.status(404).json({ message: "Asset not found" });
+    }
+    res.json({
+        message: "Fetched asset by ID",
         result: result
     });
-});
+}));
 
-// Create a new user
-router.post("/", async (request, response, next) => {
-    let user = new UserModel(request.body);
-    let result = await user.save();
-    let token = createJwt(result._id);
-    response.json({
-        message: "Created new user",
-        result: result,
-        token: token
-    });
-});
+// Create a new asset
+router.post("/", asyncHandler(async (req, res, next) => {
+    const { assetnumber, rego } = req.body;
 
-// Update a user by ID
-router.put("/:id", async (request, response, next) => {
-    let result = await UserModel.findByIdAndUpdate(request.params.id, request.body, { new: true }).exec();
-    response.json({
-        message: "Updated user",
+    const existingAsset = await AssetModel.findOne({ 
+        $or: [{ assetnumber }, { rego }] 
+    }).exec();
+
+    if (existingAsset) {
+        return res.status(400).json({ message: "Asset with this number or registration already exists" });
+    }
+
+    let asset = new AssetModel(req.body);
+
+    try {
+        let result = await asset.save();
+        res.status(201).json({
+            message: "Created new asset",
+            result: result
+        });
+    } catch (error) {
+        res.status(400).json({ message: "Invalid asset data", error: error.message });
+    }
+}));
+
+// Update an asset by ID
+router.put("/:id", asyncHandler(async (req, res, next) => {
+    try {
+        let result = await AssetModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }).exec();
+        if (!result) {
+            return res.status(404).json({ message: "Asset not found" });
+        }
+        res.json({
+            message: "Updated asset",
+            result: result
+        });
+    } catch (error) {
+        res.status(400).json({ message: "Invalid asset data", error: error.message });
+    }
+}));
+
+// Delete an asset by ID
+router.delete("/:id", asyncHandler(async (req, res, next) => {
+    let result = await AssetModel.findByIdAndDelete(req.params.id).exec();
+    if (!result) {
+        return res.status(404).json({ message: "Asset not found" });
+    }
+    res.json({
+        message: "Deleted asset",
         result: result
     });
-});
-
-// Delete a user by ID
-router.delete("/:id", async (request, response, next) => {
-    let result = await UserModel.findByIdAndDelete(request.params.id).exec();
-    response.json({
-        message: "Deleted user",
-        result: result
-    });
-});
+}));
 
 module.exports = router;
