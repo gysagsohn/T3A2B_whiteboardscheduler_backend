@@ -18,6 +18,7 @@ Plan:
 Mongoose DB
 - local Mongoose until it is finished
 - after all of the functions are finished then it will be uplaoded to use MongoDB Atlas Database
+- Deploring using render - planning to deploy to coding branch first and to test. Once all testing has passed I will use main branch
 
 ## Models
 - User
@@ -232,3 +233,5 @@ Error handling missing login details
 Wrong route
 ![alt text](<T3A2/PartB/Development Testing/route/erro handling/error handling wrong route.png>) 
 ![alt text](<T3A2/PartB/Development Testing/route/erro handling/general error handling.png>)
+
+
