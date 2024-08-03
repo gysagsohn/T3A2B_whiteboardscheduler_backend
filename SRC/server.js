@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const { errorHandler, notFoundHandler } = require("./middleware/errorHandler");
+
 
 
 // Allows POST requests to have JSON body content
@@ -20,6 +22,12 @@ app.use("/users", userRouter);
 
 const assetRouter = require("./controllers/assetRouter.js")
 app.use("/assets", assetRouter);
+
+// Handle 404 Not Found
+app.use(notFoundHandler);
+
+// Handle errors
+app.use(errorHandler);
 
 module.exports = {
 	app // Exporting the app instance for use in other files
