@@ -1,10 +1,10 @@
-// src/utils/seed.js
 const { UserModel } = require("../models/UserModel");
 const { AssetModel } = require("../models/AssetModel");
 const { ClientModel } = require("../models/ClientModel");
 const { OperatorModel } = require("../models/OperatorModel");
 const { AllocationModel } = require("../models/AllocationModel");
 const { databaseConnect, databaseClose, databaseDrop } = require("./database");
+const bcrypt = require("bcryptjs");
 
 // Seed Users
 async function seedUsers() {
@@ -25,6 +25,8 @@ async function seedUsers() {
 
     let results = [];
     for (let data of userData) {
+        // Hash the password before saving
+        data.password = await bcrypt.hash(data.password, 10);
         let user = new UserModel(data);
         let result = await user.save();
         results.push(result);

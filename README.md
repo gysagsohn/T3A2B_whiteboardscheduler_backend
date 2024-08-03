@@ -57,3 +57,10 @@ This is the production branch where I will be working on the code. It will only 
 - nodemon (DEV)
 - bcryptjs
 - jsonwebtoken
+- dotenv
+
+
+Future improvements
+- Admin function - I don't believe I have the time for this at this stage. If I do I will come back to this
+- Data access - I believe I need a middle wear for authorization on access to data based on which user made is and which company they belong to. This escaped me whilst planning, so I will make this a future improvement
+
