@@ -1,84 +1,77 @@
-// assetRouter.js
 const express = require("express");
-const { AssetModel } = require("../models/AssetModel");
+const { UserModel } = require("../models/UserModel");
 const router = express.Router();
-
 const asyncHandler = fn => (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch(next);
 };
 
-// Get all assets
 router.get("/", asyncHandler(async (req, res, next) => {
-    let result = await AssetModel.find({}).exec();
+    let result = await UserModel.find({}).exec();
     res.json({
-        message: "Fetched all assets",
+        message: "User Route is working",
         result: result
     });
 }));
 
-// Get an asset by ID
 router.get("/:id", asyncHandler(async (req, res, next) => {
-    let result = await AssetModel.findById(req.params.id).exec();
+    let result = await UserModel.findById(req.params.id).exec();
     if (!result) {
-        return res.status(404).json({ message: "Asset not found" });
+        return res.status(404).json({ message: "User not found" });
     }
     res.json({
-        message: "Fetched asset by ID",
+        message: "User Route is working",
         result: result
     });
 }));
 
-// Create a new asset
 router.post("/", asyncHandler(async (req, res, next) => {
-    const { assetnumber, rego } = req.body;
-
-    const existingAsset = await AssetModel.findOne({ 
-        $or: [{ assetnumber }, { rego }] 
-    }).exec();
-
-    if (existingAsset) {
-        return res.status(400).json({ message: "Asset with this number or registration already exists" });
+    const { useremail } = req.body;
+    const existingUser = await UserModel.findOne({ useremail }).exec();
+    if (existingUser) {
+        return res.status(400).json({ message: "User with this email already exists" });
     }
 
-    let asset = new AssetModel(req.body);
-
+    let user = new UserModel(req.body);
     try {
-        let result = await asset.save();
+        let result = await user.save();
         res.status(201).json({
-            message: "Created new asset",
+            message: "Created new user",
             result: result
         });
     } catch (error) {
-        res.status(400).json({ message: "Invalid asset data", error: error.message });
+        res.status(400).json({ message: "Invalid user data", error: error.message });
     }
 }));
 
-// Update an asset by ID
 router.put("/:id", asyncHandler(async (req, res, next) => {
     try {
-        let result = await AssetModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }).exec();
+        let result = await UserModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }).exec();
         if (!result) {
-            return res.status(404).json({ message: "Asset not found" });
+            return res.status(404).json({ message: "User not found" });
         }
         res.json({
-            message: "Updated asset",
+            message: "Updated user",
             result: result
         });
     } catch (error) {
-        res.status(400).json({ message: "Invalid asset data", error: error.message });
+        res.status(400).json({ message: "Invalid user data", error: error.message });
     }
 }));
 
-// Delete an asset by ID
 router.delete("/:id", asyncHandler(async (req, res, next) => {
-    let result = await AssetModel.findByIdAndDelete(req.params.id).exec();
+    let result = await UserModel.findByIdAndDelete(req.params.id).exec();
     if (!result) {
-        return res.status(404).json({ message: "Asset not found" });
+        return res.status(404).json({ message: "User not found" });
     }
     res.json({
-        message: "Deleted asset",
+        message: "Deleted user",
         result: result
     });
 }));
+
+router.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: "Something went wrong!", error: err.message });
+});
 
 module.exports = router;

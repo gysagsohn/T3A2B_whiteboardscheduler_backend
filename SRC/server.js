@@ -29,6 +29,9 @@ app.use("/clients", clientRouter);
 const operatorRouter = require("./controllers/operatorRouter.js")
 app.use("/operators", operatorRouter);
 
+const allocationRouter = require("./controllers/allocationRouter.js")
+app.use("/allocations", allocationRouter);
+
 // Handle 404 Not Found
 app.use(notFoundHandler);
 
