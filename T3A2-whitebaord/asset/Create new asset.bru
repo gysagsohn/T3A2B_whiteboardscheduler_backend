@@ -1,0 +1,20 @@
+meta {
+  name: Create new asset
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/assets
+  body: json
+  auth: none
+}
+
+body:json {
+   {
+      "assetnumber": "1",
+     "assetType": "Vac Truck 6000L",
+     "rego": "XXXXXX",
+     "licenceclass": "c"
+   }
+}

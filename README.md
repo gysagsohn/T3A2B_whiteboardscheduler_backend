@@ -21,6 +21,7 @@ Mongoose DB
 
 ## Models
 - User
+- company - need to see for data sterlization if I should make one or as this is a solution for my compnay at this stage do I need one
 - Asset
 - Operator
 - Client
@@ -54,3 +55,13 @@ This is the production branch where I will be working on the code. It will only 
 - express
 - mongoose
 - nodemon (DEV)
+- bcryptjs
+- jsonwebtoken
+- dotenv
+- cors
+
+
+Future improvements
+- Admin function - I don't believe I have the time for this at this stage. If I do I will come back to this
+- Data access - I believe I need a middle wear for authorization on access to data based on which user made is and which company they belong to. This escaped me whilst planning, so I will make this a future improvement
+

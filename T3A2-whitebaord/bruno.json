@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "T3A2-whitebaord - development testing local host",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
