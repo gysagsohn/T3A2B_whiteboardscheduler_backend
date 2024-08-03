@@ -1,6 +1,9 @@
 // Import the mongoose module
 const mongoose = require("mongoose");
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 // Function to connect to the database
 async function databaseConnect() {
     // Get the database URL from the environment variables, or use a default local URL if not provided
