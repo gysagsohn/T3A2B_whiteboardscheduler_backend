@@ -1,44 +1,55 @@
 const express = require("express");
 const { UserModel } = require("../models/UserModel")
+const { createJwt, validateJwt } = require("../utils/auth");
 const router = express.Router()
 
 //ground work for controller and can add models to this
 router.get("/", async (request, response, next) =>{
 
     let result = await UserModel.find({}).exec();
-
     response.json({
-        message:"User Route is working",
+        message:"Fetched all users",
         result: result
     });
-
 }); 
 
-router.get("./:id", (request, response, next) => {
+// Get a user by ID
+router.get("/:id", async (request, response, next) => {
+    let result = await UserModel.findById(request.params.id).exec();
     response.json({
-        message:"User Route is working"
+        message: "Fetched user by ID",
+        result: result
     });
-})
+});
 
-router.post("./:id", (request, response, next) => {
+// Create a new user
+router.post("/", async (request, response, next) => {
+    let user = new UserModel(request.body);
+    let result = await user.save();
+    let token = createJwt(result._id);
     response.json({
-        message:"User Route is working"
+        message: "Created new user",
+        result: result,
+        token: token
     });
-})
+});
 
-
-router.put("./:id", (request, response, next) => {
+// Update a user by ID
+router.put("/:id", async (request, response, next) => {
+    let result = await UserModel.findByIdAndUpdate(request.params.id, request.body, { new: true }).exec();
     response.json({
-        message:"User Route is working"
+        message: "Updated user",
+        result: result
     });
-})
+});
 
-
-router.delete("./:id", (request, response, next) => {
+// Delete a user by ID
+router.delete("/:id", async (request, response, next) => {
+    let result = await UserModel.findByIdAndDelete(request.params.id).exec();
     response.json({
-        message:"User Route is working"
+        message: "Deleted user",
+        result: result
     });
-})
-
+});
 
 module.exports = router;

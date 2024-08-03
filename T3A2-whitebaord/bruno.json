@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "T3A2-whitebaord",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
