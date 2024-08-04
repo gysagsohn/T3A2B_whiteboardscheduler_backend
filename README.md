@@ -9,7 +9,7 @@ For this assignment I am using Kanaban Board with Story Points to manage the app
 
 Front End repository can be found:
 
-(Insert link once done)
+[(Insert link once done)](https://github.com/gysagsohn/T3A2B_whiteboardscheduler_frontend)
 
 
 Plan:
