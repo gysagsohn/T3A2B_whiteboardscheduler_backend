@@ -6,6 +6,15 @@ meta {
 
 post {
   url: https://t3a2b-whiteboardscheduler-backend.onrender.com/users/signup
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+      "useremail": "testuser2@example.com",
+      "password": "Password123",
+      "username": "Test User1",
+      "usercompany": "Test Company"
+  }
 }

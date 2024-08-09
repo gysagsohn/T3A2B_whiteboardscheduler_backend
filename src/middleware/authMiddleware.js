@@ -1,20 +1,22 @@
 // src/middleware/authMiddleware.js
-const { validateJwt } = require('../utils/auth');
+const jwt = require('jsonwebtoken');
+const User = require('../models/UserModel');
 
-const authenticateToken = (req, res, next) => {
-    const token = req.cookies.jwtToken;  // Extract the JWT token from cookies
-    if (!token) {
-        return res.status(401).json({ message: 'Token is missing in cookies' });
-    }
+const protect = async (req, res, next) => {
+    let token;
 
-    try {
-        const decodedToken = validateJwt(token);
-        req.user = decodedToken;
-        next();
-    } catch (error) {
-        return res.status(403).json({ message: 'Invalid token' });
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        try {
+            token = req.headers.authorization.split(' ')[1];
+            const decoded = jwt.verify(token, process.env.JWT_KEY);
+            req.user = await User.findById(decoded.id).select('-password');
+            next();
+        } catch (error) {
+            return res.status(401).json({ message: 'Not authorized, token failed' });
+        }
+    } else {
+        return res.status(401).json({ message: 'Not authorized, no token' });
     }
 };
 
-
-module.exports = authenticateToken;
+module.exports = { protect };
