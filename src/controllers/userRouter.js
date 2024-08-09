@@ -28,7 +28,7 @@ router.get("/:id", authenticateToken, asyncHandler(async (req, res, next) => {
     });
 }));
 
-outer.post("/login", asyncHandler(async (req, res, next) => {
+router.post("/login", asyncHandler(async (req, res, next) => {
     const { useremail, password } = req.body;
 
     if (!useremail || !password) {
