@@ -28,8 +28,7 @@ router.get("/:id", authenticateToken, asyncHandler(async (req, res, next) => {
     });
 }));
 
-// User login route
-router.post("/login", asyncHandler(async (req, res, next) => {
+outer.post("/login", asyncHandler(async (req, res, next) => {
     const { useremail, password } = req.body;
 
     if (!useremail || !password) {
@@ -56,13 +55,14 @@ router.post("/login", asyncHandler(async (req, res, next) => {
             sameSite: 'Strict',
         });
 
-        res.json({ message: "Login successful" });
+        // Send the token in the response body as well
+        res.json({ message: "Login successful", token }); // <-- Add token here
     } catch (error) {
         next(error); 
     }
 }));
 
-//user logout
+// User logout route
 router.post("/logout", (req, res) => {
     res.cookie('jwtToken', '', { maxAge: 1 }); // Clear the token
     res.json({ message: "Logged out successfully" });
@@ -79,6 +79,13 @@ router.post("/signup", asyncHandler(async (req, res, next) => {
     let user = new UserModel(req.body);
     try {
         let result = await user.save();
+        // Automatically log in the user after successful signup by setting the JWT cookie
+        const token = createJwt(user._id);
+        res.cookie('jwtToken', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', 
+            sameSite: 'Strict',
+        });
         res.status(201).json({
             message: "Created new user",
             result: result
