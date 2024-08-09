@@ -1,0 +1,19 @@
+meta {
+  name: Post new client
+  type: http
+  seq: 5
+}
+
+get {
+  url: https://t3a2b-whiteboardscheduler-backend.onrender.com/clients
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "clientname": "Test 123", 
+    "Project": Test,
+  }
+  
+}

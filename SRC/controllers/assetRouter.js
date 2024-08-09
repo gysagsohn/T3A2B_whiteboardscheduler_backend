@@ -14,6 +14,22 @@ router.get("/", asyncHandler(async (req, res, next) => {
         message: "Fetched all assets",
         result: result
     });
+    console.log(AssetModel.schema.path('assetType').enumValues);
+}));
+
+// Endpoint to fetch asset types
+router.get("/asset-types", asyncHandler(async (req, res) => {
+    res.json({
+        assetTypes: ["Vac Truck 6000L", "Vac Truck 8000L", "Vac Truck Comboo", "Tipper 2t", "Tipper 4T"]
+    });
+    console.log(AssetModel.schema.path('licenceClass.assettype').enumValues);
+}));
+
+// Endpoint to fetch license classes
+router.get("/licence-classes", asyncHandler(async (req, res) => {
+    res.json({
+        licenceClasses: ["C", "HR", "HC"]
+    });
 }));
 
 // Get an asset by ID
@@ -80,5 +96,7 @@ router.delete("/:id", asyncHandler(async (req, res, next) => {
         result: result
     });
 }));
+
+
 
 module.exports = router;
