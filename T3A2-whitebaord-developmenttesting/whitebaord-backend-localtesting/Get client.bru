@@ -1,0 +1,22 @@
+meta {
+  name: Get client
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:3000/Assets
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjU5ZTVmMTBkMTRmNTc3YzdjMDU0NiIsImlhdCI6MTcyMzE3OTAwMSwiZXhwIjoxNzI1NzcxMDAxfQ.L-d3N8-j_-GYqK6UjZ7nAxsEsnsiKjncHQPcVsEIk0M
+}
+
+body:json {
+  {
+      "useremail": "testuser@example.com",
+      "password": "Password123"
+  }
+}

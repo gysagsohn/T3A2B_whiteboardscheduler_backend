@@ -1,13 +1,27 @@
+// src/controllers/userRouter.js
 const express = require("express");
 const { UserModel } = require("../models/UserModel");
-const router = express.Router();
 const { comparePasswords, createJwt } = require("../utils/auth");
+const authenticateToken = require('../middleware/authMiddleware');
+const router = express.Router();
+
 const asyncHandler = fn => (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch(next);
 };
 
-router.get("/", asyncHandler(async (req, res, next) => {
+router.get("/", authenticateToken, asyncHandler(async (req, res, next) => {
     let result = await UserModel.find({}).exec();
+    res.json({
+        message: "User Route is working",
+        result: result
+    });
+}));
+
+router.get("/:id", authenticateToken, asyncHandler(async (req, res, next) => {
+    let result = await UserModel.findById(req.params.id).exec();
+    if (!result) {
+        return res.status(404).json({ message: "User not found" });
+    }
     res.json({
         message: "User Route is working",
         result: result
@@ -16,8 +30,6 @@ router.get("/", asyncHandler(async (req, res, next) => {
 
 // User login route
 router.post("/login", asyncHandler(async (req, res, next) => {
-    console.log("Request Body:", req.body); // Log the request body
-
     const { useremail, password } = req.body;
 
     if (!useremail || !password) {
@@ -36,27 +48,28 @@ router.post("/login", asyncHandler(async (req, res, next) => {
         }
 
         const token = createJwt(user._id);
-        res.json({
-            message: "Login successful",
-            token: token
+
+        // Set JWT as HttpOnly cookie
+        res.cookie('jwtToken', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', 
+            sameSite: 'Strict',
         });
+
+        res.json({ message: "Login successful" });
     } catch (error) {
-        next(error); // Pass error to the error handler
+        next(error); 
     }
 }));
 
-router.get("/:id", asyncHandler(async (req, res, next) => {
-    let result = await UserModel.findById(req.params.id).exec();
-    if (!result) {
-        return res.status(404).json({ message: "User not found" });
-    }
-    res.json({
-        message: "User Route is working",
-        result: result
-    });
-}));
+//user logout
+router.post("/logout", (req, res) => {
+    res.cookie('jwtToken', '', { maxAge: 1 }); // Clear the token
+    res.json({ message: "Logged out successfully" });
+});
 
-router.post("/", asyncHandler(async (req, res, next) => {
+// Sign up route
+router.post("/signup", asyncHandler(async (req, res, next) => {
     const { useremail } = req.body;
     const existingUser = await UserModel.findOne({ useremail }).exec();
     if (existingUser) {
@@ -74,36 +87,5 @@ router.post("/", asyncHandler(async (req, res, next) => {
         res.status(400).json({ message: "Invalid user data", error: error.message });
     }
 }));
-
-router.put("/:id", asyncHandler(async (req, res, next) => {
-    try {
-        let result = await UserModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }).exec();
-        if (!result) {
-            return res.status(404).json({ message: "User not found" });
-        }
-        res.json({
-            message: "Updated user",
-            result: result
-        });
-    } catch (error) {
-        res.status(400).json({ message: "Invalid user data", error: error.message });
-    }
-}));
-
-router.delete("/:id", asyncHandler(async (req, res, next) => {
-    let result = await UserModel.findByIdAndDelete(req.params.id).exec();
-    if (!result) {
-        return res.status(404).json({ message: "User not found" });
-    }
-    res.json({
-        message: "Deleted user",
-        result: result
-    });
-}));
-
-router.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ message: "Something went wrong!", error: err.message });
-});
 
 module.exports = router;
