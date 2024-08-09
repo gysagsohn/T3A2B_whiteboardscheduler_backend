@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node SRC/index.js",
-    "dev": "nodemon SRC/index.js",
-    "seed": "node SRC/utils/seed.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "seed": "node src/utils/seed.js"
   },
   "keywords": [],
   "author": "",
