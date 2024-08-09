@@ -1,0 +1,20 @@
+meta {
+  name: User Signup
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/users/signup
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "useremail": "testuser@example.com",
+      "password": "Password123",
+      "username": "Test User",
+      "usercompany": "Test Company"
+  }
+}

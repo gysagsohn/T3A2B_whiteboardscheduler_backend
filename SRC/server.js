@@ -17,7 +17,7 @@ app.get("/", (request, response, next) => {
 	});
 });
 
-const userRouter = require("./controllers/userRouter.js")
+const userRouter = require("/src/controllers/userRouter")
 app.use("/users", userRouter);
 
 const assetRouter = require("./controllers/assetRouter.js")
