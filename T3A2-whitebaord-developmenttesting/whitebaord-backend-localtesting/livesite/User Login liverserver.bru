@@ -1,0 +1,18 @@
+meta {
+  name: User Login liverserver
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://t3a2b-whiteboardscheduler-backend.onrender.com/users/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "useremail": "testuser2@example.com",
+      "password": "Password123"
+  }
+}
