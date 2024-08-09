@@ -1,4 +1,3 @@
-// src/utils/server.js
 const express = require('express');
 const app = express();
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
@@ -26,4 +25,4 @@ app.use('/allocations', allocationRouter);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-module.exports = app;
+module.exports = app;  // Ensure you are exporting the app correctly
