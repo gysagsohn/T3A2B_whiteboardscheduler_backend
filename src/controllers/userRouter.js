@@ -83,7 +83,7 @@ router.post("/signup", asyncHandler(async (req, res, next) => {
         const token = createJwt(user._id);
         res.cookie('jwtToken', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', 
+            secure: false, // come back to this to change
             sameSite: 'Strict',
         });
         res.status(201).json({
