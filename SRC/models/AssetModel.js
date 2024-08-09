@@ -24,12 +24,9 @@ const assetSchema = mongoose.Schema({
     },
     // Define the license class field with string array type, enum options, and required constraint
     licenceClass: {
-        assettype: {
-            // Note: This might be moved to its own model as it's the same in both asset and operator models
-            type: [String],
-            enum: ["C", "HR", "HC"],
-            required: true
-        }
+        type: [String],
+        enum: ["C", "HR", "HC"],
+        required: true
     }
 });
 

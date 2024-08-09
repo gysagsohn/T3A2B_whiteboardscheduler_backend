@@ -1,0 +1,21 @@
+meta {
+  name: create asset
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://t3a2b-whiteboardscheduler-backend.onrender.com/assets
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "assetnumber": "123", 
+    "assetType": ["Vac Truck 6000L"], 
+    "rego": "XYZ123", 
+    "licenceClass": {"assettype": ["HR"]}
+  }
+  
+}
