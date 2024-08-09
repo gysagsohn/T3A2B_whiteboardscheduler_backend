@@ -1,5 +1,4 @@
-// Import the app from the server.js file
-const { app } = require("./server.js");
+const app = require('./server.js');  // Import the app
 
 // Import the databaseConnect function from the database.js file
 const { databaseConnect } = require("./utils/database.js");
