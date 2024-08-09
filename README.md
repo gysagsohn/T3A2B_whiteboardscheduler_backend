@@ -260,3 +260,29 @@ Route to clients
 
 Error route
 ![alt text](<T3A2/PartB/Development Testing/backend server testing/backend error test wrong route.png>) 
+
+### Signup/login and protected path
+
+I need to create a path where a user can login/sign up and only with a valid JWT Token be able to access the other paths. To achieve this a middleware  and changes to userRouter were made. To test that this was working, I did the following local test
+
+New user create
+![alt text](<T3A2-whitebaord-developmenttesting/protected route/New User.png>)
+
+New user login (get token)
+![alt text](<T3A2-whitebaord-developmenttesting/protected route/new user to get JWT Token.png>)
+
+Checking that you need correct token
+![alt text](<T3A2-whitebaord-developmenttesting/protected route/wrong token check error message.png>)
+
+Get all Allocation
+![alt text](<T3A2-whitebaord-developmenttesting/protected route/get all allocations.png>)
+
+Get all Clients
+![alt text](<T3A2-whitebaord-developmenttesting/protected route/get all clients.png>)
+
+Get all Operators
+![alt text](<T3A2-whitebaord-developmenttesting/protected route/get all operators.png>)
+
+Get All Assets
+![alt text](<T3A2-whitebaord-developmenttesting/protected route/corret toeken to get all asset.png>)
+
