@@ -2,14 +2,9 @@
 const { validateJwt } = require('../utils/auth');
 
 const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    if (!authHeader) {
-        return res.status(401).json({ message: 'Authorization header missing' });
-    }
-
-    const token = authHeader.split(' ')[1];
+    const token = req.cookies.jwtToken;  // Extract the JWT token from cookies
     if (!token) {
-        return res.status(401).json({ message: 'Token missing in authorization header' });
+        return res.status(401).json({ message: 'Token is missing in cookies' });
     }
 
     try {
@@ -20,5 +15,6 @@ const authenticateToken = (req, res, next) => {
         return res.status(403).json({ message: 'Invalid token' });
     }
 };
+
 
 module.exports = authenticateToken;

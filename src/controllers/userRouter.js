@@ -56,7 +56,7 @@ outer.post("/login", asyncHandler(async (req, res, next) => {
         });
 
         // Send the token in the response body as well
-        res.json({ message: "Login successful", token }); // <-- Add token here
+        res.json({ message: "Login successful" });
     } catch (error) {
         next(error); 
     }
