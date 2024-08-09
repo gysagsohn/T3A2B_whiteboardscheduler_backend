@@ -5,15 +5,14 @@ const { errorHandler, notFoundHandler } = require("./middleware/errorHandler.js"
 const cookieParser = require('cookie-parser');
 
 
-
+// Using Parsing Cookies
+app.use(cookieParser());
 // Allows POST requests to have JSON body content
 app.use(express.json());
 
-// Using Parsing Cookies
-app.use(cookieParser());
 
 app.use(cors({
-    origin: 'http://localhost:3000', // Replace with your frontend origin
+    origin: 'http://localhost:3000', // Replace with your frontend origin once it is live
     credentials: true, // Allow credentials (cookies) to be sent
 }));
 
