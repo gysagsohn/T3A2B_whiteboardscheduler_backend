@@ -10,7 +10,6 @@ app.use(express.json());
 const userRouter = require('./controllers/userRouter');
 app.use('/users', userRouter);
 
-// Example routes for other parts of your application (these can be expanded as needed)
 const assetRouter = require('./controllers/assetRouter');
 app.use('/assets', assetRouter);
 

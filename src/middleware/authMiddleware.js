@@ -1,22 +1,20 @@
-// src/middleware/authMiddleware.js
-const jwt = require('jsonwebtoken');
-const User = require('../models/UserModel');
+const { validateJwt, decodeJwt } = require('../utils/auth');
 
-const protect = async (req, res, next) => {
-    let token;
+const authenticateToken = (req, res, next) => {
+    // Extract the JWT token from the Authorization header
+    const token = req.headers.authorization?.split(' ')[1]; 
+    if (!token) {
+        return res.status(401).json({ message: 'Token is missing' });
+    }
 
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-        try {
-            token = req.headers.authorization.split(' ')[1];
-            const decoded = jwt.verify(token, process.env.JWT_KEY);
-            req.user = await User.findById(decoded.id).select('-password');
-            next();
-        } catch (error) {
-            return res.status(401).json({ message: 'Not authorized, token failed' });
-        }
-    } else {
-        return res.status(401).json({ message: 'Not authorized, no token' });
+    try {
+        validateJwt(token); // Validate the token
+        const decodedToken = decodeJwt(token); // Decode the token to get user info
+        req.user = decodedToken; // Attach the decoded token to the request object
+        next(); // Continue to the next middleware or route handler
+    } catch (error) {
+        return res.status(403).json({ message: 'Invalid token' });
     }
 };
 
-module.exports = { protect };
+module.exports = authenticateToken;

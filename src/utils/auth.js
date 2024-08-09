@@ -22,7 +22,6 @@ function createJwt(userId) {
 function validateJwt(jwtToValidate) {
     try {
         const decodedJwt = jwt.verify(jwtToValidate, process.env.JWT_KEY);
-        console.log("Decoded JWT data:", decodedJwt);
         return true;
     } catch (error) {
         throw new Error("User JWT is not valid!");
