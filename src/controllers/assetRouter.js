@@ -14,7 +14,6 @@ router.get("/", asyncHandler(async (req, res, next) => {
         message: "Fetched all assets",
         result: result
     });
-    console.log(AssetModel.schema.path('assetType').enumValues);
 }));
 
 // Endpoint to fetch asset types
@@ -22,7 +21,6 @@ router.get("/asset-types", asyncHandler(async (req, res) => {
     res.json({
         assetTypes: AssetModel.schema.path('assetType').caster.enumValues
     });
-    console.log(AssetModel.schema.path('assetType').caster.enumValues);
 }));
 
 // Endpoint to fetch license classes
@@ -30,7 +28,6 @@ router.get("/licence-classes", asyncHandler(async (req, res) => {
     res.json({
         licenceClasses: AssetModel.schema.path('licenceClass').caster.enumValues
     });
-    console.log(AssetModel.schema.path('licenceClass').caster.enumValues);
 }));
 
 // Get an asset by ID
