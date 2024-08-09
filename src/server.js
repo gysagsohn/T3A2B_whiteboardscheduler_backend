@@ -2,13 +2,20 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const { errorHandler, notFoundHandler } = require("./middleware/errorHandler.js");
+const cookieParser = require('cookie-parser');
 
 
 
 // Allows POST requests to have JSON body content
 app.use(express.json());
 
-app.use(cors());
+// Using Parsing Cookies
+app.use(cookieParser());
+
+app.use(cors({
+    origin: 'http://localhost:3000', // Replace with your frontend origin
+    credentials: true, // Allow credentials (cookies) to be sent
+}));
 
 app.get("/", (request, response, next) => {
 
