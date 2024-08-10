@@ -57,4 +57,37 @@ router.post("/logout", (req, res) => {
     res.json({ message: "Logout successful" });
 });
 
+// Route to delete a specific user by ID (protected)
+router.delete("/:id", authenticateToken, async (req, res) => {
+    try {
+        const user = await UserModel.findByIdAndDelete(req.params.id);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.json({ message: "User deleted successfully", result: user });
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting user", error: error.message });
+    }
+});
+
+router.put("/:id", authenticateToken, async (req, res) => {
+    try {
+        const { useremail, username, usercompany } = req.body;
+
+        // Ensure that we don't accidentally overwrite the password or other sensitive fields without explicit intention.
+        const updatedFields = { useremail, username, usercompany };
+
+        // Find the user by ID and update the fields, with { new: true } returning the updated document
+        const user = await UserModel.findByIdAndUpdate(req.params.id, updatedFields, { new: true, runValidators: true });
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.json({ message: "User updated successfully", result: user });
+    } catch (error) {
+        res.status(500).json({ message: "Error updating user", error: error.message });
+    }
+});
+
 module.exports = router;
