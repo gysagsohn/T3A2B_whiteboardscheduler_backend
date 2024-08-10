@@ -7,7 +7,7 @@ const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
 app.use(express.json());
 
 app.use(cors({
-    origin: 'http://localhost:3000', 
+    origin: ['http://localhost:3000', 'https://whiteboardschedulercom.netlify.ap', 'https://whiteboardscheduler.com/'],
     credentials: true,
     optionsSuccessStatus: 200,
 }));

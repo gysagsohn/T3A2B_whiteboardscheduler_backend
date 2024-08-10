@@ -5,16 +5,18 @@ meta {
 }
 
 post {
-  url: https://t3a2b-whiteboardscheduler-backend.onrender.com/users/signup
+  url: https://t3a2b-whiteboardscheduler-backend.onrender.com/allocations/
   body: json
   auth: none
 }
 
 body:json {
   {
-      "useremail": "testuser2@example.com",
-      "password": "Password123",
-      "username": "Test User1",
-      "usercompany": "Test Company"
+      "asset": "66b574c0de14e9c68f338091",
+      "operator": "66b55b9d4e9cfebb9dc2e26f",
+      "client": "66b54ec902d8881d90fa856b",
+      "date": "2024-08-16",
+      "shiftType": "Day",
+      "description": "Allocation description (optional)"
   }
 }
