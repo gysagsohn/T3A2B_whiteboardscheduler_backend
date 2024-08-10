@@ -49,9 +49,9 @@ router.get("/:id", async (req, res, next) => {
 // Create a new allocation
 router.post("/", async (req, res, next) => {
     try {
-        const { asset, operator, client, allocationDate, shiftType, date } = req.body;
+        const { asset, operator, client, date, shiftType } = req.body;
 
-        if (!asset || !operator || !client || !allocationDate || !shiftType || !date) {
+        if (!asset || !operator || !client || !date || !shiftType) {
             return res.status(400).json({ message: "Missing required fields" });
         }
 
@@ -65,6 +65,7 @@ router.post("/", async (req, res, next) => {
         handleError(res, err);
     }
 });
+
 
 // Update an allocation by ID
 router.put("/:id", async (req, res, next) => {
