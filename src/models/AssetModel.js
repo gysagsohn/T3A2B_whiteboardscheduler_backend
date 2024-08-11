@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const assetSchema = mongoose.Schema({
     // Define the asset number field with integer type, required, and unique constraints
     assetnumber: {
-        type: Number,
+        type: String,
         required: true,
         unique: true
     },
