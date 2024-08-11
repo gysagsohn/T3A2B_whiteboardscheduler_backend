@@ -1,59 +1,78 @@
-# T3A2B-whiteboardscheduler
+# T3A2B - Whiteboard Scheduler Backend
 
+This is my final assignment from Corder Academy. This repository contains the backend of the Whiteboard Scheduler application. The backend is built with Node.js, Express, and MongoDB using Mongoose for data modeling.
 
-The plan for this repository is to create the backend of my application here.
+## Table of Contents
 
-I have added another file to this repository called T3A2A, that contains all of the Part A of this assignment and the planning for it. 
+- [Frontend Repository](#frontend-repository)
+- [Plan](#plan)
+- [Database](#database)
+- [Models](#models)
+- [Routes](#routes)
+- [Repository Management](#repository-management)
+- [Packages/Libraries](#packageslibraries)
+- [Future Improvements](#future-improvements)
+- [Project Management](#project-management)
+- [Development Testing](#development-testing)
+  - [Basic Backend Files](#basic-backend-files)
+  - [Seeding Data](#seeding-data)
+  - [Hashing Passwords](#hashing-passwords)
+  - [Route Testing](#route-testing)
+    - [Asset Router](#asset-router)
+    - [Client Router](#client-router)
+    - [Operator Router](#operator-router)
+    - [User Router](#user-router)
+    - [Allocation Router](#allocation-router)
+  - [Error Handling Routes](#error-handling-routes)
+  - [Backend Server Testing](#backend-server-testing)
+  - [Protected Routes](#protected-routes)
 
-For this assignment I am using Kanaban Board with Story Points to manage the application. I will upload the screen shot of the trello board here, but it will contain both the backend and front end stuff.
+## Frontend Repository
 
-Front End repository can be found:
+The frontend of this application can be found here:
+[Frontend Repository](https://github.com/gysagsohn/T3A2B_whiteboardscheduler_frontend)
+[Frontend Link](https://whiteboardscheduler.com/)
 
-[(Insert link once done)](https://github.com/gysagsohn/T3A2B_whiteboardscheduler_frontend)
+## Plan
 
+### Database
 
-Plan:
+- **MongoDB**: The backend is initially tested on a local MongoDB instance and then deployed using MongoDB Atlas.
+- **Deployment**: The application is deployed using Render. The backend is tested on a coding branch before being deployed to the main branch.
 
-## Database
-Mongoose DB
-- local Mongoose until it is finished
-- after all of the functions are finished then it will be uplaoded to use MongoDB Atlas Database
-- Deploring using render - planning to deploy to coding branch first and to test. Once all testing has passed I will use main branch
-https://t3a2b-whiteboardscheduler-backend.onrender.com
+### Models
 
-## Models
+The following models are implemented in the backend:
+
 - User
-- company - need to see for data sterlization if I should make one or as this is a solution for my compnay at this stage do I need one
 - Asset
 - Operator
 - Client
 - Allocation
 
-## Route
-Each Model will have it own route
+### Routes
+
+Each model has its own route:
+
 - User
 - Asset
 - Operator
 - Client
 - Allocation
 
-## Repository Management
-To ensure that all code is tested and functional three branches have been made:
-- Main 
-- Testing
-- Coding
+### Repository Management
 
-### Main
-This is the finished product that can be released
+The repository is managed using three branches:
 
-### Testing
-This is where the code will go once it is out of production and need to be tested before it is published. For testing I am planning on doing a combination of 2, manual testing and Github testing. For the end point of the API they will be done manual testing to make sure they are working 
+- **Main**: The final product ready for release.
+- **Testing**: The branch for testing code after it exits production. Testing includes both manual and GitHub testing.
+- **Coding**: The development branch where code is written and tested before being pushed to the testing branch.
 
-## Coding
-This is the production branch where I will be working on the code. It will only be pushed to the testing branch once I believe the code is ready to be published
+### Packages/Libraries
 
-## Packaged/Library
-- npm (node package manager) 
+The following packages/libraries are used:
+
+- npm (Node Package Manager)
 - express
 - mongoose
 - nodemon (DEV)
@@ -61,229 +80,276 @@ This is the production branch where I will be working on the code. It will only 
 - jsonwebtoken
 - dotenv
 - cors
-- cookie-parser - to manage JWT being passed on in cookies
 
+### Future Improvements
 
-## Future improvements
-- Admin function - I don't believe I have the time for this at this stage. If I do I will come back to this
-- Data access - I believe I need a middle wear for authorization on access to data based on which user made is and which company they belong to. This escaped me whilst planning, so I will make this a future improvement
+- **Admin Function**: Potentially adding an admin feature to manage users and data.
+- **Data Access Control**: Implementing middleware for data authorization based on user roles and the company they belong to.
 
-## Development Testing 
-As I have been developing this code, I have been testing the code. Please see below for all of the testing 
+## Project Management
 
-### Basic Backend files 
+To ensure the development process was organized and efficient, I used **Trello** for task management and assigned **story points** to estimate the effort required for each task. I also followed the **Conventional Commits** standard for commit messages.
 
-**checking server is working**
-![T3A2/PartB/Development Testing/Basic Backend file set up/basic testing.png](<T3A2/PartB/Development Testing/Basic Backend file set up/basic testing.png>)
+### Trello Kanban Board
 
-console.log message and checking that it is coming up on terminal log
-T3A2/PartB/Development Testing/Basic Backend file set up/testing.png
+- **Trello**: T3A2/PartB/trello baord
 
+### Story Points
 
-### Seeding file - before route and hasing
-After some of the models were made I did a seeded some data to check that it is working
+- **Story Points**: Each task on the Trello board was assigned story points, which represented the estimated difficulty and time required to complete the task. This helped prioritize tasks and allocate time more effectively throughout the project.
 
-![alt text](<T3A2/PartB/Development Testing/seeddata/Screenshot 2024-08-02 at 2.10.26 PM.png>)
-![alt text](<T3A2/PartB/Development Testing/seeddata/Screenshot 2024-08-02 at 2.10.33 PM.png>)
+### Conventional Commits
 
+- **Conventional Commits 1.0.0**: I adhered to the Conventional Commits standard for my Git commit messages, making it easier to understand the changes made in each commit. This practice improved the clarity and organization of the commit history.
 
-### Hashing password
-Since I had some seeded data I tried to hash the passwords 
-![alt text](<T3A2/PartB/Development Testing/hashing password/frist test after code to check hasing is working.png>)
+## Development Testing - Manual Testing
 
-It looked like it worked but when I used jwt.it it failed
+### Basic Backend Files
 
-T3A2/PartB/Development Testing/hashing password/testing of hasing on seed data failure.png
+**Server Testing**
 
-After making some changes to the code and adding an internal logic to check that seeded data was being hashed, it passed the test
+The server was tested to ensure it was working properly:
 
-![alt text](<T3A2/PartB/Development Testing/hashing password/terminal line code.png>)
+![Basic Testing](T3A2/PartB/Development%20Testing/Basic%20Backend%20file%20set%20up/basic%20testing.png)
 
-```JS
-    // Initialise an empty array to store results
-    let results = [];
-    // Loop through each user data entry in the userData array
-    for (let data of userData) {
-        // Create a new UserModel instance with the current user data
-        let user = new UserModel(data);
-        // Save the user instance to the database and store the result
-        let result = await user.save();
-        // Generate a JWT for the newly created user using their ID
-        let token = createJwt(result._id);
-        console.log("Generated JWT:", token); // Print the generated JWT
-        // Validate the generated JWT to ensure it's correct
-        let isValid = validateJwt(token);
-        console.log("Is JWT valid?", isValid); // Print whether the JWT is valid or not
-        // Add the saved user result to the results array
-        results.push(result);
-    }
-    // Return the array of results
-    return results;
-}
-```
+- Method: Start the app and go to the local link to see if the message is up.
+- Passed: Server is working as expected.
 
-And used JWT.it to double check
-![](<T3A2/PartB/Development Testing/hashing password/jwt.to for seeddata.png>)
+### Seeding Data
 
-Confirmed that it was working
+After creating some models, data was seeded to the database:
 
-### Route - local testing
+![Seeding Data](T3A2/PartB/Development%20Testing/seeddata/Screenshot%202024-08-02%20at%202.10.26%20PM.png)
+![Seeding Data](T3A2/PartB/Development%20Testing/seeddata/Screenshot%202024-08-02%20at%202.10.33%20PM.png)
 
-Each of the route have been tested themselves to ensure that routes were working. I used Bruno to test the API locally.
+- Method: Check the terminal line to ensure the seeded data is coming up.
+- Passed: Data is successfully seeded into the database.
+
+### Hashing Passwords
+
+Testing the hashing of passwords:
+
+![Hashed Data](T3A2/PartB/Development%20Testing/hashing%20password/frist%20test%20after%20code%20to%20check%20hasing%20is%20working.png)
+
+- Method: Go to the terminal to see logged data of hashed passwords.
+- Passed: Passwords are hashed.
+
+Validated hashed passwords using JWT:
+
+![JWT Validation First Attempt](T3A2/PartB/Development%20Testing/hashing%20password/testing%20of%20hashing%20on%20seed%20data%20failure.png)
+
+- Method: Use [JWT.io](https://jwt.io) and the key to decode the data.
+- Failed: JWT validation did not work.
+
+Second Attempt:
+
+![Hashed Data](T3A2/PartB/Development%20Testing/hashing%20password/terminal%20line%20code.png)
+![JWT Validation](T3A2/PartB/Development%20Testing/hashing%20password/jwt.to%20for%20seeddata.png)
+
+- Method: Check the terminal line for hashed data, and use JWT.io to validate.
+- Passed: JWT validation worked.
+
+### Route Testing
+
+Each route was tested locally using the Bruno API testing tool:
 
 #### Asset Router
 
-Get all asset
-![alt text](<T3A2/PartB/Development Testing/route/assetrouter/asset get all.png>) 
-
-POST new asset
-![alt text](<T3A2/PartB/Development Testing/route/assetrouter/create new asset.png>) 
-
-Delete 1 aset
-![alt text](<T3A2/PartB/Development Testing/route/assetrouter/delete asset.png>) 
-
-Get asset by id
-![alt text](<T3A2/PartB/Development Testing/route/assetrouter/Get asset by id.png>) 
-
-PUT asset details
-![alt text](<T3A2/PartB/Development Testing/route/assetrouter/update asset details by id.png>)
+- **GET all assets**: Passed
+  - Method: Use Bruno to test the route and verify that information comes up.
+  ![Get All Assets](T3A2/PartB/Development%20Testing/route/assetrouter/asset%20get%20all.png)
+  
+- **POST new asset**: Passed
+  - Method: Use Bruno to test the route and create a new asset.
+  ![Post New Asset](T3A2/PartB/Development%20Testing/route/assetrouter/create%20new%20asset.png)
+  
+- **DELETE asset**: Passed
+  - Method: Use Bruno to test the route and delete an asset.
+  ![Delete Asset](T3A2/PartB/Development%20Testing/route/assetrouter/delete%20asset.png)
+  
+- **GET asset by ID**: Passed
+  - Method: Use Bruno to test the route and get one asset by ID.
+  ![Get Asset By ID](T3A2/PartB/Development%20Testing/route/assetrouter/Get%20asset%20by%20id.png)
+  
+- **PUT update asset**: Passed
+  - Method: Use Bruno to test the route and update one asset's information.
+  ![Update Asset](T3A2/PartB/Development%20Testing/route/assetrouter/update%20asset%20details%20by%20id.png)
 
 #### Client Router
 
-POST new client
-![alt text](<T3A2/PartB/Development Testing/route/client/create new client.png>) 
+- **POST new client**: Passed
+  - Method: Use Bruno to test the route and create a new client.
+  ![Post New Client](T3A2/PartB/Development%20Testing/route/client/create%20new%20client.png)
+  
+- **DELETE client**: Passed
+  - Method: Use Bruno to test the route and delete one client.
+  ![Delete Client](T3A2/PartB/Development%20Testing/route/client/delete%20client.png)
+  
+- **PUT update client**: Passed
+  - Method: Use Bruno to test the route and update one client's information.
+  ![Update Client](T3A2/PartB/Development%20Testing/route/client/edit%20client%20.png)
+  
+- **GET all clients**: Passed
+  - Method: Use Bruno to test the route and retrieve all clients' information.
+  ![Get All Clients](T3A2/PartB/Development%20Testing/route/client/get%20all%20client.png)
+  
+- **GET client by ID**: Passed
+  - Method: Use Bruno to test the route and retrieve one client's information by ID.
+  ![Get Client By ID](T3A2/PartB/Development%20Testing/route/client/Get%20client%20by%20ID.png)
 
-Delete client by id
-![alt text](<T3A2/PartB/Development Testing/route/client/delete client.png>) 
+#### Operator Router
 
-PUT client detail
-![alt text](<T3A2/PartB/Development Testing/route/client/edit client .png>) 
+- **DELETE operator**: Passed
+  - Method: Use Bruno to test the route and delete one operator's information.
+  ![Delete Operator](T3A2/PartB/Development%20Testing/route/operators/Delete%20Operator.png)
+  
+- **GET all operators**: Passed
+  - Method: Use Bruno to test the route and retrieve all operators' information.
+  ![Get All Operators](T3A2/PartB/Development%20Testing/route/operators/Get%20all%20operators.png)
+  
+- **GET operator by ID**: Passed
+  - Method: Use Bruno to test the route and retrieve one operator's information by ID.
+  ![Get Operator By ID](T3A2/PartB/Development%20Testing/route/operators/get%20operator%20by%20id.png)
+  
+- **PUT new operator**: Passed
+  - Method: Use Bruno to test the route and create a new operator.
+  ![Post New Operator](T3A2/PartB/Development%20Testing/route/operators/new%20operator.png)
+  
+- **POST edit operator**: Passed
+  - Method: Use Bruno to test the route and edit one operator's information.
+  ![Update Operator](T3A2/PartB/Development%20Testing/route/operators/update%20operator%20details.png)
 
-Get all Clients
-![alt text](<T3A2/PartB/Development Testing/route/client/get all client.png>) 
+#### User Router
 
-Get client by id
-![alt text](<T3A2/PartB/Development Testing/route/client/Get client by ID.png>)
+- **GET user by ID**: Passed
+  - Method: Use Bruno to test the route and retrieve one user's information by ID.
+  ![Get User By ID](T3A2/PartB/Development%20Testing/route/user%20route/local%20testing/userroute/API%20get%201%20user%20by%20id.png)
+  
+- **DELETE user**: Passed
+  - Method: Use Bruno to test the route and delete one user's information.
+  ![Delete User](T3A2/PartB/Development%20Testing/route/user%20route/local%20testing/userroute/delete%201%20user.png)
+  
+- **GET all users**: Passed
+  - Method: Use Bruno to test the route and retrieve all users' information.
+  ![Get All Users](T3A2/PartB/Development%20Testing/route/user%20route/local%20testing/userroute/Get%20all%20useres.png)
+  
+- **PUT edit user**: Passed
+  - Method: Use Bruno to test the route and update one user's information.
+  ![Update User](T3A2/PartB/Development%20Testing/route/user%20route/local%20testing/userroute/update%20user%20details.png)
+  
+- **POST new user**: Passed
+  - Method: Use Bruno to test the route and create a new user.
+  ![Post New User](T3A2/PartB/Development%20Testing/route/user%20route/local%20testing/userroute/Post%20new%20used.png)
+  
+- **Login and Authentication**: Passed
+  - Method: Use Bruno to test the login route and verify JWT token is provided.
+  ![Login and Auth](T3A2/PartB/Development%20Testing/route/user%20route/loginig%20in.png)
 
-#### Operator Route
+#### Allocation Router
 
-Delete operator by id
-![alt text](<T3A2/PartB/Development Testing/route/operators/Delete Operator.png>) 
+- **POST new allocation**: Passed
+  - Method: Use Bruno to test the route and create a new allocation.
+  ![Post New Allocation](T3A2/PartB/Development%20Testing/route/allocations/create%20new%20allocation.png)
+  
+- **DELETE allocation**: Passed
+  - Method: Use Bruno to test the route and delete one allocation's information.
+  ![Delete Allocation](T3A2/PartB/Development%20Testing/route/allocations/delet%20Allocation.png)
+  
+- **PUT update allocation**: Passed
+  - Method: Use Bruno to test the route and update one allocation's information.
+  ![Update Allocation](T3A2/PartB/Development%20Testing/route/allocations/edit%20allocation.png)
+  
+- **GET all allocations**: Passed
+  - Method: Use Bruno to test the route and retrieve all allocations' information.
+  ![Get All Allocations](T3A2/PartB/Development%20Testing/route/allocations/get%20all%20allocations.png)
+  
+- **GET allocation by ID**: Passed
+  - Method: Use Bruno to test the route and retrieve one allocation's information by ID.
+  ![Get Allocation By ID](T3A2/PartB/Development%20Testing/route/allocations/get%20allocations%20by%20id.png)
 
-Get all operators
-![alt text](<T3A2/PartB/Development Testing/route/operators/Get all operators.png>) 
+### Error Handling Routes
 
-Get operator by id
-[alt text](<T3A2/PartB/Development Testing/route/operators/get operator by id.png>) 
+Error handling was tested to ensure correct behavior:
 
-PUT new operator
-![alt text](<T3A2/PartB/Development Testing/route/operators/new operator.png>) 
+- **Wrong client ID**: Passed
+  - Method: Use Bruno to test the route with an incorrect ID and verify the correct error message is delivered.
+  ![Wrong Client ID](T3A2/PartB/Development%20Testing/route/erro%20handling/errohandling%20wrong%20client%20details.png)
+  
+- **Missing login details**: Passed
+  - Method: Use Bruno to test the route with missing login information and verify the correct error message is delivered.
+  ![Missing Login Details](T3A2/PartB/Development%20Testing/route/erro%20handling/error%20handling%20login.png)
+  
+- **Wrong route**: Passed
+  - Method: Use Bruno to test a non-existent route and verify the correct error message is delivered.
+  ![Wrong Route](T3A2/PartB/Development%20Testing/route/erro%20handling/error%20handling%20wrong%20route.png)
+  ![General Error Handling](T3A2/PartB/Development%20Testing/route/erro%20handling/general%20error%20handling.png)
 
-POST edit operator detail
-![alt text](<T3A2/PartB/Development Testing/route/operators/update operator details.png>)
+### Backend Server Testing
 
-#### User Route
+Backend routes were tested after deployment to Render:
 
-Get user by id
-![alt text](<T3A2/PartB/Development Testing/route/user route/local testing/userroute/API get 1 uer by id.png>) 
+- **Backend deployed on Render**: Passed
+  - Method: Deploy the backend and check the terminal log on Render to see the server message.
+  ![Backend Render](T3A2/PartB/Development%20Testing/backend%20server%20testing/backend%20server%20live%20render.png)
+  - Method: Go to the Render site and verify the server message is displayed.
+  ![Backend Live](T3A2/PartB/Development%20Testing/backend%20server%20testing/backend%20serverlive.png)
+  
+- **Route to allocations**: Passed
+  - Method: Test the deployed route by going to the allocations route.
+  ![Route to Allocations](T3A2/PartB/Development%20Testing/backend%20server%20testing/backend%20allocations.png)
+  
+- **Route to assets**: Passed
+  - Method: Test the deployed route by going to the assets route.
+  ![Route to Assets](T3A2/PartB/Development%20Testing/backend%20server%20testing/backend%20assets.png)
+  
+- **Route to operators**: Passed
+  - Method: Test the deployed route by going to the operators route.
+  ![Route to Operators](T3A2/PartB/Development%20Testing/backend%20server%20testing/backend%20operators.png)
+  
+- **Route to users**: Passed
+  - Method: Test the deployed route by going to the users route.
+  ![Route to Users](T3A2/PartB/Development%20Testing/backend%20server%20testing/backend%20users.png)
+  
+- **Route to clients**: Passed
+  - Method: Test the deployed route by going to the clients route.
+  ![Route to Clients](T3A2/PartB/Development%20Testing/backend%20server%20testing/backend%20route%20to%20clients.png)
+  
+- **Error route**: Passed
+  - Method: Test the deployed route by going to a non-existent route and verify the correct error message is delivered.
+  ![Error Route](T3A2/PartB/Development%20Testing/backend%20server%20testing/backend%20error%20test%20wrong%20route.png)
 
-Delete user by id
-![alt text](<T3A2/PartB/Development Testing/route/user route/local testing/userroute/delete 1 user.png>) 
+### Protected Routes
 
-Get all user details
-![alt text](<T3A2/PartB/Development Testing/route/user route/local testing/userroute/Get all useres.png>) 
-![alt text](<T3A2/PartB/Development Testing/route/user route/local testing/userroute/Get all users.png>) 
+The JWT token authentication was tested for protected routes:
 
-PUT edit user
-![alt text](<T3A2/PartB/Development Testing/route/user route/local testing/userroute/update user details.png>)
-
-POST new user
-![alt text](<T3A2/PartB/Development Testing/route/user route/local testing/userroute/Post new used.png>)
-
-
-With the login router, there is also a login and authentication process
-![alt text](<T3A2/PartB/Development Testing/route/user route/loginig in.png>)
-
-#### Allocations route
-New Route POST
-![alt text](<T3A2/PartB/Development Testing/route/allocations/create new allocation.png>) 
-
-Deleting 1 allocation
-![alt text](<T3A2/PartB/Development Testing/route/allocations/delet Allocation.png>) 
-
-PUT method to edit allocation
-[alt text](<T3A2/PartB/Development Testing/route/allocations/edit allocation.png>) 
-
-GET all allocation
-![alt text](<T3A2/PartB/Development Testing/route/allocations/get all allocations.png>) 
-
-Get allocation by id (1 allocation)
-![alt text](<T3A2/PartB/Development Testing/route/allocations/get allocations by id.png>)
-
-### Error handling route
-I crated a middle wear for some basic error handling and specific error handling for each route. 
-
-Wrong client id
-![alt text](<T3A2/PartB/Development Testing/route/erro handling/errohandling wrong client details.png>) 
-
-Updating operator filed and checking that all required fields are present
-![alt text](<T3A2/PartB/Development Testing/route/erro handling/error handling for operator.png>) 
-
-Error handling missing login details
-![alt text](<T3A2/PartB/Development Testing/route/erro handling/error handling login.png>) 
-
-Wrong route
-![alt text](<T3A2/PartB/Development Testing/route/erro handling/error handling wrong route.png>) 
-![alt text](<T3A2/PartB/Development Testing/route/erro handling/general error handling.png>)
-
-
-### Backend server testing
-Please see below to see testing for route once it was deployed to Render and MongoDB
-
-Backend deployed on render
-![alt text](<T3A2/PartB/Development Testing/backend server testing/backend server live render.png>) 
-![alt text](<T3A2/PartB/Development Testing/backend server testing/backend serverlive.png>) 
-
-Route to allocations
-![alt text](<T3A2/PartB/Development Testing/backend server testing/backend allocations.png>) 
-
-Route to asset
-![alt text](<T3A2/PartB/Development Testing/backend server testing/backend assets.png>) 
-
-Route to operators
-![alt text](<T3A2/PartB/Development Testing/backend server testing/backend operators.png>) 
-
-Route to users
-![alt text](<T3A2/PartB/Development Testing/backend server testing/backend users.png>)
-
-Route to clients
-![alt text](<T3A2/PartB/Development Testing/backend server testing/backend route to clients.png>)
-
-Error route
-![alt text](<T3A2/PartB/Development Testing/backend server testing/backend error test wrong route.png>) 
-
-### Signup/login and protected path
-
-I need to create a path where a user can login/sign up and only with a valid JWT Token be able to access the other paths. To achieve this a middleware  and changes to userRouter were made. To test that this was working, I did the following local test
-
-New user create
-![alt text](<T3A2-whitebaord-developmenttesting/protected route/New User.png>)
-
-New user login (get token)
-![alt text](<T3A2-whitebaord-developmenttesting/protected route/new user to get JWT Token.png>)
-
-Checking that you need correct token
-![alt text](<T3A2-whitebaord-developmenttesting/protected route/wrong token check error message.png>)
-
-Get all Allocation
-![alt text](<T3A2-whitebaord-developmenttesting/protected route/get all allocations.png>)
-
-Get all Clients
-![alt text](<T3A2-whitebaord-developmenttesting/protected route/get all clients.png>)
-
-Get all Operators
-![alt text](<T3A2-whitebaord-developmenttesting/protected route/get all operators.png>)
-
-Get All Assets
-![alt text](<T3A2-whitebaord-developmenttesting/protected route/corret toeken to get all asset.png>)
-
+- **New user creation**: Passed
+  - Method: Test the user creation route and verify a JWT token is provided.
+  ![New User Creation](T3A2-whitebaord-developmenttesting/protected%20route/New%20User.png)
+  
+- **New user login**: Passed
+  - Method: Test the user login route and verify a JWT token is provided.
+  ![New User Login](T3A2-whitebaord-developmenttesting/protected%20route/new%20user%20to%20get%20JWT%20Token.png)
+  
+- **Correct token check**: Passed
+  - Method: Use the JWT token to access protected routes.
+  ![Correct Token Check](T3A2-whitebaord-developmenttesting/protected%20route/corret%20toeken%20to%20get%20all%20asset.png)
+  
+- **Wrong token check**: Passed
+  - Method: Use an incorrect JWT token to access protected routes and verify the access is denied.
+  ![Wrong Token Check](T3A2-whitebaord-developmenttesting/protected%20route/wrong%20token%20check%20error%20message.png)
+  
+- **Get all allocations**: Passed
+  - Method: Use a valid JWT token to access the allocations route.
+  ![Get All Allocations](T3A2-whitebaord-developmenttesting/protected%20route/get%20all%20allocations.png)
+  
+- **Get all clients**: Passed
+  - Method: Use a valid JWT token to access the clients route.
+  ![Get All Clients](T3A2-whitebaord-developmenttesting/protected%20route/get%20all%20clients.png)
+  
+- **Get all operators**: Passed
+  - Method: Use a valid JWT token to access the operators route.
+  ![Get All Operators](T3A2-whitebaord-developmenttesting/protected%20route/get%20all%20operators.png)
+  
+- **Get all assets**: Passed
+  - Method: Use a valid JWT token to access the assets route.
+  ![Get All Assets](T3A2-whitebaord-developmenttesting/protected%20route/corret%20toeken%20to%20get%20all%20asset.png)
